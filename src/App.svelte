@@ -1,65 +1,169 @@
 <script>
-  import logo from './assets/svelte.png'
-  import Counter from './lib/Counter.svelte'
+import BarraSuperior from "./components/BarraSuperior.svelte";
+import Titulo from "./components/Titulo.svelte";
+
+let buscaValue = 'Murilovsky'
+let usuario = null
+
+function AoEnviar(){
+  console.log(buscaValue)
+  usuario={
+  avatar_url:'https://github.com/Murilovsky.png',
+  login:'Murilovsky',
+  nome:'Murilo Gama',
+  perfil_url:'https://github.com/Murilovsky',
+  reps_publicos:30,
+  seguidores:10
+  }
+}
+
 </script>
 
-<main>
-  <img src={logo} alt="Svelte Logo" />
-  <h1>Hello world!</h1>
-
-  <Counter />
-
-  <p>
-    Visit <a href="https://svelte.dev">svelte.dev</a> to learn how to build Svelte
-    apps.
-  </p>
-
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-    the officially supported framework, also powered by Vite!
-  </p>
+<main  class="app">
+  <header>
+    <Titulo/>
+    <div class="busca-usuario">
+      <form on:submit|preventDefault={AoEnviar}>
+        <input type="text" class="input" bind:value={buscaValue}/>
+        <div class="botao-container">
+          <button type="submit" class="botao">Buscar</button>
+        </div>
+      </form>
+    </div>
+  </header>
+  {#if usuario}
+  <div class="card-usuario">
+    <BarraSuperior/>
+    <div class="usuario">
+      <div class="foto-container">
+        <a href={usuario.perfil_url} target="_blank" rel="noopener">
+          <div class="foto-usuario" style:background-image='url({usuario.avatar_url})'>
+          </div>
+        </a>
+      </div>
+      <div class="detalhes-usuario">
+        <div class="info">
+          Nome:<span>{usuario.nome}</span>
+        </div>
+        <div class="info">
+          User:<span>{usuario.login}</span>
+        </div>
+        <div class="info">
+          Seguidores:<span>{usuario.seguidores}</span>
+        </div>
+        <div class="info">
+          Repositórios:<span>{usuario.reps_publicos}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  {/if}
 </main>
 
 <style>
-  :root {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      .app {
+    max-height: 100vh;
   }
 
-  main {
-    text-align: center;
-    padding: 1em;
-    margin: 0 auto;
+  header {    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
-  img {
-    height: 16rem;
-    width: 16rem;
+  .busca-usuario {
+    position: relative;
+    width: 70%;
   }
 
-  h1 {
-    color: #ff3e00;
-    text-transform: uppercase;
-    font-size: 4rem;
-    font-weight: 100;
-    line-height: 1.1;
-    margin: 2rem auto;
-    max-width: 14rem;
+  .input {
+    padding: 15px 25px;
+    width: calc(100% - 8.75rem);
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #2e80fa;
+    box-shadow: 0px 17px 52px rgba(222, 231, 247, 0.4);
+    outline: 0;
   }
 
-  p {
-    max-width: 14rem;
-    margin: 1rem auto;
-    line-height: 1.35;
+  .input::placeholder {
+    font-family: "Roboto";
+    font-style: italic;
+    font-weight: 300;
+    font-size: 19.5px;
+    line-height: 26px;
+    color: #6e8cba;
   }
 
-  @media (min-width: 480px) {
-    h1 {
-      max-width: none;
-    }
+  .botao-container {
+    position: absolute;
+    width: 9.625rem;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+  }
 
-    p {
-      max-width: none;
-    }
+  .botao {
+    padding: 15px 24px;
+    border-radius: 8px;
+    border: none;
+    background: #2e80fa;
+    line-height: 26px;
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+
+    transition: background-color 0.2s;
+
+    display: flex;
+    align-items: center;
+    gap: 13px;
+  }
+
+  .botao:hover {
+    background: #4590ff;
+  }
+
+  .card-usuario {
+    margin-top: 65px;
+  }
+
+  .usuario {
+    padding: 28px 0;
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: -12px 37px 45px rgba(133, 127, 201, 0.18);
+    border-radius: 0px 0px 13px 13px;
+
+    display: flex;
+    justify-content: center;
+  }
+
+  .foto-container {
+    margin-right: 81px;
+  }
+
+  .foto-usuario {
+    width: 12.75rem;
+    height: 12.75rem;
+    border: 4.56px solid #2e80fa;
+    border-radius: 50%;
+    background-size: cover;
+  }
+
+  .detalhes-usuario {
+    margin-right: 55px;
+  }
+
+  .detalhes-usuario > .info {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 31px;
+    color: #395278;
+  }
+
+  .detalhes-usuario > .info > span {
+    color: #6781a8;
+    font-weight: normal;
   }
 </style>

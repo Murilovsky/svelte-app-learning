@@ -2,6 +2,7 @@
 import Formulario from "./components/Formulario.svelte";
 import Titulo from "./components/Titulo.svelte";
 import Usuario from "./components/Usuario.svelte";
+import {scale} from 'svelte/transition'
 
 let usuario = null
 
@@ -22,7 +23,11 @@ function BindUser(customEvent,){
     </div>
   </header>
   {#if usuario}
-  <Usuario usuario={usuario}/>
+  {#key usuario}
+  <div in:scale>
+    <Usuario usuario={usuario}/>
+  </div>
+  {/key}
   {/if}
 </main>
 

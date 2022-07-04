@@ -58,17 +58,18 @@ $: temRepos = usuario.repos.length
   </main>
 
   <style>
-    .card-usuario {
+
+.card-usuario {
     margin-top: 65px;
-  }
+     }
 
   .usuario {
-    padding: 28px 0;
+    padding: 2rem 0;
     background: rgba(255, 255, 255, 0.5);
     box-shadow: -12px 37px 45px rgba(133, 127, 201, 0.18);
     border-radius: 0px 0px 13px 13px;
-
     display: flex;
+    
     flex-wrap: wrap;
     justify-content: center;
   }
@@ -76,7 +77,7 @@ $: temRepos = usuario.repos.length
   .foto-container {
     margin-right: 81px;
   }
-  
+
   .foto-usuario {
     width: 12.75rem;
     height: 12.75rem;
@@ -101,7 +102,7 @@ $: temRepos = usuario.repos.length
     font-weight: normal;
   }
   .bio{
-    margin: 1rem 2rem;
+    margin: 1rem 5rem;
     width: 100%;
   }
   .repositorios > .titulo {
